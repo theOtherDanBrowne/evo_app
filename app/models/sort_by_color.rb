@@ -1,0 +1,12 @@
+class SortByColor
+	attr_accessor :population, :creature,:background
+	def initialize 
+		
+	end
+
+	def get_dec_color(gnome)
+		#returns decimal color value from single gnome. 
+		color = gnome.to_i(2)
+				
+	end
+end

@@ -1,0 +1,48 @@
+class Creature < ActiveRecord::Base
+attr_accessor :color_h, :color_s, :color_l, :color_r,:color_g,:color_b, :color_rgb
+		
+	 
+	 def randomize_gnome 
+	   
+	 # self.r_gnome = random_gnome
+	 # self.g_gnome = random_gnome
+	 # self.b_gnome = random_gnome
+	   
+	   self.r_gnome = "00000000"
+		 self.g_gnome = "00000000"
+	   self.b_gnome = "00000000"
+	  
+     self.gnome = self.r_gnome + self.g_gnome + self.b_gnome
+ 	   get_colors
+ 	   
+	 end
+	 
+	 def random_gnome
+	 gnome = ""
+	 		for i in 0..7
+	 				
+	 			gnome << rand(0..1).to_s
+	 		end
+	 		
+	 		return gnome	
+	 	
+   end
+	
+	 def get_colors
+	 	#get hexcolor
+	   self.color = self.r_gnome.to_i(2).to_s(base=16).rjust(2, '0') + self.g_gnome.to_i(2).to_s(base=16).rjust(2, '0') +  self.b_gnome.to_i(2).to_s(base=16).rjust(2, '0')
+	 	 
+	 	 self.color_r = get_rgb_color(self.r_gnome)
+	 	 self.color_g = get_rgb_color(self.g_gnome)
+	 	 self.color_b = get_rgb_color(self.b_gnome)
+	 	 
+	 	 self.color_rgb = Color::RGB.new(self.color_r,self.color_g,self.color_b)
+	 		
+	 end
+	 
+	 def get_rgb_color(gnome)
+		#returns decimal color value from single gnome. 
+		return gnome.to_i(2)
+				
+	end
+end

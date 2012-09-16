@@ -1,0 +1,36 @@
+<h1>Evolution experiment</h1>
+<p>Creatures</p>
+<%= link_to "Start", "/start" %> | 
+<%= link_to "Predators", "/kill/10" %> | 
+<%= link_to "Random Attrition", "/kill_random/10" %> | 
+<%= link_to "Reproduce", "/clone_random" %> | 
+<%= link_to "Mutate", "/mutate_gnome" %><br>
+Generation: <%=@population[1].generation%>
+<div id="env" style=cwidth:1080px;padding:10px;border:1px solid black">
+<% @population.each do |creature| %>
+	<div class="creatures" mutation="<%=creature.mutation %>" id="creature_<%=creature.id %>" style="color:white;display:inline-block;border:1px solid black; margin:2px;padding:3px;width:200px;background:#<%=creature.color %>">
+	
+	<div class="gnome"><%=creature.gnome %></div>
+  </div>
+<% end %>
+
+</div>
+<script language="javascript">
+$(document).ready(function(){
+
+	$(".creatures").each(function(){
+		if($(this).attr('mutation') > -1){
+		var pos = parseInt($(this).attr('mutation'))
+		
+			g_str = $(this).find(".gnome").html()
+			n_str = g_str.slice( 0,pos ) + 
+							"<span style='color:red'>"+
+							g_str.substr( pos,1 )+
+							"</span>" +
+							g_str.slice(pos+1)
+			 $(this).find(".gnome").html(n_str)
+			}
+	})
+
+})
+</script>
